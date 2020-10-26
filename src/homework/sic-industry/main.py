@@ -1,10 +1,9 @@
 import os
 import json
 from typing import Dict
-
 from fintools.settings import get_logger
 from fintools.utils import StringWrapper, timeit
-
+from utils import final_search
 from .settings import (
     INDUSTRY_SEARCH_DEFAULT_FILENAME,
     INDUSTRY_SEARCH_DEFAULT_THRESHOLD
@@ -18,4 +17,10 @@ class Main:
 
     @timeit(logger=logger)
     def search(self, title: str, exact: bool = False, file: str = INDUSTRY_SEARCH_DEFAULT_FILENAME) -> str:
-        pass
+        with open(file, "r") as f:
+            content = f.read()
+        dictionary = json.loads(content)
+        path = final_search(dictionary,title,exact)
+        return json.dumps(path,indent=4)
+
+
