@@ -4,7 +4,10 @@ from logging.config import dictConfig
 from typing import Dict, Optional
 
 # General
-
+FINTOOLS_DEFAULT_THREADS = int(os.environ.get(
+    "FINTOOLS_DEFAULT_THREADS",
+    default="5"
+))
 
 # Logging configuration
 
